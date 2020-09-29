@@ -27,14 +27,14 @@ class DefaultController
     }
 
     /**
-     * @Route("/view/{id}", name="showAdvert")
+     * @Route("/view/{id<\d+>}", name="showAdvert")
      */
     public function showAdvert(int $id) {
         return new Response("<h1>Annonce n°".$id."</h1>");
     }
 
     /**
-     * @Route("/profile/{id}", name="showUser")
+     * @Route("/profile/{id<\d+>}", name="showUser")
      */
     public function showUser(int $id) {
         return new Response("<h1>User n°".$id."</h1>");

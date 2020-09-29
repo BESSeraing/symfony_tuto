@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7dbe73e5-5edc-4236-8809-fc7bc14cac89" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
     </list>
@@ -160,7 +158,7 @@
       <workItem from="1600888430896" duration="2916000" />
       <workItem from="1600896313162" duration="831000" />
       <workItem from="1601016468992" duration="2478000" />
-      <workItem from="1601364818923" duration="504000" />
+      <workItem from="1601364818923" duration="941000" />
     </task>
     <servers />
   </component>
