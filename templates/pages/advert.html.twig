@@ -22,31 +22,36 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 mb50">
                                 <div class="images">
+                                    {% for picture in advert.pictures %}
+                                        {% if loop.first %}
+                                            <a class="lb-link" data-rel="product-gallery" href="{{asset('assets/scott/')}}{{ picture.fileLink }}" title="Image Title">
+                                                <img alt="Image Title" class="img-responsive" src="{{asset('assets/scott/')}}{{ picture.fileLink }}" title="Image Title">
+                                            </a>
+                                            <div class="thumbnails mt">
+                                        {% else %}
+                                            <a class="lb-link" data-rel="product-gallery" href="{{asset('assets/scott/')}}{{ picture.fileLink }}" title="Image Title 2">
+                                                <img alt="image title" height="100" src="{{asset('assets/scott/')}}{{ picture.fileLink }}">
+                                            </a>
+                                        {% endif %}
+
+                                        {% if loop.last %}
+                                            </div>
+                                        {% endif %}
+
+                                    {% endfor %}
 {#                                    <span class="onsale">Sale!</span>#}
-                                    <a class="lb-link" data-rel="product-gallery" href="{{asset('assets/scott/53475214_1016563661866620_7896463576045453312_n.jpg')}}" title="Image Title">
-                                        <img alt="Image Title" class="img-responsive" src="{{asset('assets/scott/53475214_1016563661866620_7896463576045453312_n.jpg')}}" title="Image Title">
-                                    </a>
 
-                                    <div class="thumbnails mt">
-                                        <a class="lb-link" data-rel="product-gallery" href="{{asset('assets/scott/53489175_1016563665199953_6176948323597942784_n.jpg')}}" title="Image Title 2">
-                                            <img alt="image title" height="100" width="100" src="{{asset('assets/scott/53489175_1016563665199953_6176948323597942784_n.jpg')}}">
-                                        </a>
-                                        <a class="lb-link" data-rel="product-gallery" href="{{asset('assets/scott/Screenshot_2020-09-29 Facebook.jpg')}}" title="Image Title 2">
-                                            <img alt="image title" height="100" width="100" src="{{asset('assets/scott/Screenshot_2020-09-29 Facebook.jpg')}}">
-                                        </a>
-
-                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-sm-6 mb50">
                                 <div class="summary entry-summary">
-                                    <h1 class="mt0"> Scott Scale 930 - 2018 </h1>
+                                    <h1 class="mt0"> {{advert.title}} </h1>
                                     <div>
                                         <p class="price">
 {#                                            <del><span class="amount">£3.00</span>#}
 {#                                            </del>#}
-                                            <ins><span class="amount">1250 €</span>
+                                            <ins><span class="amount">{{advert.price | price}}</span>
                                             </ins>
                                         </p>
                                     </div>
