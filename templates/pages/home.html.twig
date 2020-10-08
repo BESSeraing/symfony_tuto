@@ -1,119 +1,41 @@
 {% extends 'layouts/layout.html.twig'%}
 
 {% block header %}
-    <header id="headerwrap" class="backstretched fullheight">
-        <div class="container vertical-center">
-            <div class="intro-text vertical-center text-left smoothie">
-                <div class="intro-heading wow fadeIn heading-font" data-wow-delay="0.2s">This Is Kompleet</div>
-                <div class="intro-sub-heading wow fadeIn secondary-font" data-wow-delay="0.4s">Take a look our <span class="rotate">awesome home pages, sexy portfolio items, flexible blog examples</span></div>
-            </div>
-        </div>
-    </header>
+{#    <header id="headerwrap" class="backstretched fullheight">#}
+{#        <div class="container vertical-center">#}
+{#            <div class="intro-text vertical-center text-left smoothie">#}
+{#                <div class="intro-heading wow fadeIn heading-font" data-wow-delay="0.2s">This Is Kompleet</div>#}
+{#                <div class="intro-sub-heading wow fadeIn secondary-font" data-wow-delay="0.4s">Take a look our <span class="rotate">awesome home pages, sexy portfolio items, flexible blog examples</span></div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </header>#}
 {% endblock header %}
 
 {% block content %}
+
     <section>
         <div class="section-inner">
+            <h1 class="text-center mt-4 mb50">Les dernières annonces</h1>
             <div class="container">
                 <div class="row mb50">
-                    <div class="col-md-4">
-                        <div class="hover-item mb30">
-                            <img src="assets/img/shop/shop1.jpg" class="img-responsive smoothie" alt="">
-                            <div class="overlay-item-caption smoothie"></div>
-                            <div class="hover-item-caption smoothie">
-                                <div class="vertical-center smoothie">
-                                    <a href="#" class="smoothie btn btn-primary">View</a>
+                    {% for advert in adverts %}
+                        <div class="col-md-4">
+                            <div class="hover-item mb30">
+                                <img src="{{ advert.gallery.photos.first.url }}" class="img-responsive smoothie" alt="">
+                                <div class="overlay-item-caption smoothie"></div>
+                                <div class="hover-item-caption smoothie">
+                                    <div class="vertical-center smoothie">
+                                        <a href="{{ url('showAdvert', {id: advert.id}) }}" class="smoothie btn btn-primary">View</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="item-excerpt">
-                            <h4 class="pull-right">$24.99</h4>
-                            <h4><a href="#">Slim-Fit Shirt</a></h4>
-                            <p>Taste oh spoke about no solid of hills up shade. Occasion so bachelor humoured striking by attended doubtful be it.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hover-item mb30">
-                            <img src="assets/img/shop/shop2.jpg" class="img-responsive smoothie" alt="">
-                            <div class="overlay-item-caption smoothie"></div>
-                            <div class="hover-item-caption smoothie">
-                                <div class="vertical-center smoothie">
-                                    <a href="#" class="smoothie btn btn-primary">View</a>
-                                </div>
+                            <div class="item-excerpt">
+                                <h4 class="pull-right">{{ advert.price }} €</h4>
+                                <h4><a href="{{ url('showAdvert', {id: advert.id}) }}">{{ advert.title}}</a></h4>
+                                <p>{{ advert.description }}</p>
                             </div>
                         </div>
-                        <div class="item-excerpt">
-                            <h4 class="pull-right">$24.99</h4>
-                            <h4><a href="#">Slim-Fit Shirt</a></h4>
-                            <p>Taste oh spoke about no solid of hills up shade. Occasion so bachelor humoured striking by attended doubtful be it.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hover-item mb30">
-                            <img src="assets/img/shop/shop3.jpg" class="img-responsive smoothie" alt="">
-                            <div class="overlay-item-caption smoothie"></div>
-                            <div class="hover-item-caption smoothie">
-                                <div class="vertical-center smoothie">
-                                    <a href="#" class="smoothie btn btn-primary">View</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-excerpt">
-                            <h4 class="pull-right">$24.99</h4>
-                            <h4><a href="#">Slim-Fit Shirt</a></h4>
-                            <p>Taste oh spoke about no solid of hills up shade. Occasion so bachelor humoured striking by attended doubtful be it.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb50">
-                    <div class="col-md-4">
-                        <div class="hover-item mb30">
-                            <img src="assets/img/shop/shop4.jpg" class="img-responsive smoothie" alt="">
-                            <div class="overlay-item-caption smoothie"></div>
-                            <div class="hover-item-caption smoothie">
-                                <div class="vertical-center smoothie">
-                                    <a href="#" class="smoothie btn btn-primary">View</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-excerpt">
-                            <h4 class="pull-right">$24.99</h4>
-                            <h4><a href="#">Slim-Fit Shirt</a></h4>
-                            <p>Taste oh spoke about no solid of hills up shade. Occasion so bachelor humoured striking by attended doubtful be it.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hover-item mb30">
-                            <img src="assets/img/shop/shop5.jpg" class="img-responsive smoothie" alt="">
-                            <div class="overlay-item-caption smoothie"></div>
-                            <div class="hover-item-caption smoothie">
-                                <div class="vertical-center smoothie">
-                                    <a href="#" class="smoothie btn btn-primary">View</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-excerpt">
-                            <h4 class="pull-right">$24.99</h4>
-                            <h4><a href="#">Slim-Fit Shirt</a></h4>
-                            <p>Taste oh spoke about no solid of hills up shade. Occasion so bachelor humoured striking by attended doubtful be it.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hover-item mb30">
-                            <img src="assets/img/shop/shop6.jpg" class="img-responsive smoothie" alt="">
-                            <div class="overlay-item-caption smoothie"></div>
-                            <div class="hover-item-caption smoothie">
-                                <div class="vertical-center smoothie">
-                                    <a href="#" class="smoothie btn btn-primary">View</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-excerpt">
-                            <h4 class="pull-right">$24.99</h4>
-                            <h4><a href="#">Slim-Fit Shirt</a></h4>
-                            <p>Taste oh spoke about no solid of hills up shade. Occasion so bachelor humoured striking by attended doubtful be it.</p>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

@@ -1,0 +1,11 @@
+{% macro advert_image_link(src) %}
+    <a class="lb-link" data-rel="product-gallery" href="{{ src }}" title="Image Title">
+        <img alt="Image Title" class="img-responsive" src="{{ src }}" title="Image Title">
+    </a>
+{% endmacro %}
+
+{% macro advert_image_link_thumb(src) %}
+    <a class="lb-link" data-rel="product-gallery" href="{{ src }}" title="Image Title">
+        <img alt="Image Title" height="100" src="{{ src }}" title="Image Title">
+    </a>
+{% endmacro %}

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Advert;
+use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,34 @@ class AdvertRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Advert::class);
+    }
+
+    public function findByTag(Tag $tag) {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb ->leftJoin('a.tags', 'tags')
+            ->where('tags in (:tagList)')
+            ->setParameter('tagList', [$tag])
+            ;
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findWithPhotos($limit) {
+        $qb = $this->createQueryBuilder('a');
+        $qb
+            ->groupBy('a.id')
+            ->orderBy('a.creationDate', 'DESC')
+            ->setMaxResults($limit)
+        ;
+
+        $qb->leftJoin('a.gallery', 'gallery')
+            ->addSelect('gallery')
+            ->leftJoin('gallery.photos', 'photos')
+            ->addSelect('photos')
+        ;
+
+        return $qb->getQuery()->getResult();
+
     }
 
     // /**

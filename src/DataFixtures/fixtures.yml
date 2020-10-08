@@ -1,0 +1,50 @@
+- title: Scott Genius 2019
+  price: 2300.00
+  year: 2019
+  creationDate: "2020-06-06"
+  description: Magnifique vélo acheté pendant le confinement mais très peu roulé.
+  category : Enduro
+  tag:
+    - XTR
+    - SCOTT
+  photos :
+    - https://www.vojomag.com/app/uploads/2017/06/scott-genius-keno-2017-vojo-paul-humbert-24.jpg
+
+- title: Scott Scale 925
+  price: 1600.00
+  year: 2019
+  creationDate: "2020-06-08"
+  description: Upgradé GX, roues carbone.
+  category : Cross-Country
+  tag:
+    - GX
+    - SCOTT
+  photos :
+    - https://pictures.ssg-service.com/280/280465_1699146_png_zoom_5.jpg
+    - https://www.12gobiking.nl/media/catalog/product/cache/1/image/1000x1000/05e17a266b0e9cc26fb81a2e0bed7e78/i/m/img_6995.jpg
+
+- title: Canondale FSI2 2017
+  price: 1500.00
+  year: 2017
+  creationDate: "2020-09-06"
+  description: 3000 km, vend cause achat full suspended, nouvelle cassette et nouvelle chaine.
+  category : Cross-Country
+  tag:
+    - XO
+    - Canondale
+  photos :
+    - https://www.picclickimg.com/d/l400/pict/263667274693_/Cannondale-F-Si-Carbon-2-Mountain-Bike-2017-8.jpg
+    - https://images.immediate.co.uk/production/volatile/sites/21/2019/03/cannondale-fsi-carbon2-02-1470134372952-1x2px1nuxr8ip-1cdd0a7.jpg?quality=90&resize=900%2C1600
+
+- title: Trek domane SL 2015
+  price: 900.00
+  year: 2015
+  creationDate: "2020-10-23"
+  description: 5500 km, vend cause achat electrique. Sors de l'entretien.
+  category : Route
+  tag:
+    - Ultegra
+    - TREK
+  photos :
+    - https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQeGpVZLwrN2mrjcJRlk9SGEvOIg8UTpMufxg&usqp=CAU
+    - https://www.velonews.com/wp-content/uploads/sites/5/2014/05/9O5B7356.jpg

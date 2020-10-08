@@ -1,0 +1,31 @@
+{% extends 'layouts/layout.html.twig' %}
+
+{% block content %}
+    <section>
+        <div class="section-inner">
+            <h1 class="text-center mt-4 mb50">Les annonces correspondant au tag {{ tag.name }} </h1>
+            <div class="container">
+                <div class="row mb50">
+                    {% for advert in adverts %}
+                        <div class="col-md-4">
+                            <div class="hover-item mb30">
+                                <img src="{{ advert.gallery.photos.first.url }}" class="img-responsive smoothie" alt="">
+                                <div class="overlay-item-caption smoothie"></div>
+                                <div class="hover-item-caption smoothie">
+                                    <div class="vertical-center smoothie">
+                                        <a href="{{ url('showAdvert', {id: advert.id}) }}" class="smoothie btn btn-primary">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-excerpt">
+                                <h4 class="pull-right">{{ advert.price }} €</h4>
+                                <h4><a href="{{ url('showAdvert', {id: advert.id}) }}">{{ advert.title}}</a></h4>
+                                <p>{{ advert.description }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
