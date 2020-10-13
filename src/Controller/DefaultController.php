@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Advert;
 use App\Repository\AdvertRepository;
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,10 +40,10 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/view/{id<\d+>}", name="showAdvert")
+     * @Route("/view/{slug}", name="showAdvert")
      */
-    public function showAdvert(int $id, AdvertRepository $advertRepository) {
-        $advert = $advertRepository->find($id);
+    public function showAdvert(Advert $advert, AdvertRepository $advertRepository) {
+//        $advert = $advertRepository->findOneBySlug($slug);
         // On demande à Twig de faire le rendu du template (n'hésitez pas à aller voir le contenu de la methode renderView)
         $view = $this->renderView('pages/advert.html.twig', ['advert'=>$advert]);
         // On met ce rendu dans le corps de la réponse qu'on renvoie

@@ -27,11 +27,13 @@ class AppFixtures extends Fixture
         $tags = array_map(function($object) {
             return $object['tag'];
         }, $data);
+
+
         // Flatten array of arrays : https://stackoverflow.com/questions/1319903/how-to-flatten-a-multidimensional-array
         $tags = array_unique(call_user_func_array('array_merge', $tags));
 
-//        dump($categories);
-        dump($tags);
+        //        dump($categories);
+//        dump($tags);
         $storedCategories = [];
         foreach ($categories as $categoryName) {
             $category = new Category();
@@ -48,10 +50,8 @@ class AppFixtures extends Fixture
             $storedTags[$tagName] = $tag;
         }
 
-        $manager->flush();
-
-        dump($storedTags);
-        dump($storedCategories);
+//        dump($storedTags);
+//        dump($storedCategories);
 
         foreach ($data as $advertData) {
             $advert = new Advert();

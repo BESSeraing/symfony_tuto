@@ -6,9 +6,11 @@ use App\Repository\AdvertRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=AdvertRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Advert
 {
@@ -60,6 +62,31 @@ class Advert
      * @ORM\Column(type="date")
      */
     private $year;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastUpdate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Gedmo\Slug(fields={"title"})
+     */
+    private $slug;
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist() {
+        $this->creationDate = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate() {
+        $this->lastUpdate = new \DateTime();
+    }
 
     public function __construct()
     {
@@ -177,6 +204,30 @@ class Advert
     public function setYear(\DateTimeInterface $year): self
     {
         $this->year = $year;
+
+        return $this;
+    }
+
+    public function getLastUpdate(): ?\DateTimeInterface
+    {
+        return $this->lastUpdate;
+    }
+
+    public function setLastUpdate(?\DateTimeInterface $lastUpdate): self
+    {
+        $this->lastUpdate = $lastUpdate;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

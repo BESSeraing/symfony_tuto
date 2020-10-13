@@ -48,6 +48,24 @@ class AdvertRepository extends ServiceEntityRepository
 
     }
 
+    public function findOneWithPhotos($limit): Advert {
+        $qb = $this->createQueryBuilder('a');
+        $qb
+            ->groupBy('a.id')
+            ->orderBy('a.creationDate', 'DESC')
+            ->setMaxResults($limit)
+        ;
+
+        $qb->leftJoin('a.gallery', 'gallery')
+            ->addSelect('gallery')
+            ->leftJoin('gallery.photos', 'photos')
+            ->addSelect('photos')
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+
+    }
+
     // /**
     //  * @return Advert[] Returns an array of Advert objects
     //  */

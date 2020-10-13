@@ -25,13 +25,13 @@
                                 <div class="overlay-item-caption smoothie"></div>
                                 <div class="hover-item-caption smoothie">
                                     <div class="vertical-center smoothie">
-                                        <a href="{{ url('showAdvert', {id: advert.id}) }}" class="smoothie btn btn-primary">View</a>
+                                        <a href="{{ url('showAdvert', {slug: advert.slug}) }}" class="smoothie btn btn-primary">View</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="item-excerpt">
                                 <h4 class="pull-right">{{ advert.price }} €</h4>
-                                <h4><a href="{{ url('showAdvert', {id: advert.id}) }}">{{ advert.title}}</a></h4>
+                                <h4><a href="{{ url('showAdvert', {slug: advert.slug}) }}">{{ advert.title}}</a></h4>
                                 <p>{{ advert.description }}</p>
                             </div>
                         </div>
