@@ -1,0 +1,50 @@
+{% extends 'layouts/admin-layout.html.twig' %}
+
+
+{% block h1 %}
+    {% if advertForm.vars.value.id is null %} {# Pour récupérer l'entité liée à un form view #}
+        Créer une annonce
+    {% else %}
+        Modifier une annonce
+    {% endif %}
+{% endblock h1 %}
+
+{% block content %}
+    {{ form_start(advertForm) }}
+    {{ form_row(advertForm.title) }}
+    {{ form_row(advertForm.price) }}
+    {{ form_row(advertForm.description) }}
+    {{ form_row(advertForm.year) }}
+    {{ form_row(advertForm.category) }}
+    {{ form_row(advertForm.tags) }}
+
+    {{ form_label(advertForm.gallery) }}
+    <ul id="photo-gallery-list" class="collection-form"
+        data-prototype="{{ form_widget(advertForm.gallery.photos.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ advertForm.gallery.photos | length }}">
+        {% for photoField in advertForm.gallery.photos %}
+            <li>
+                {{ form_widget(photoField) }}
+                {{ form_errors(photoField) }}
+            </li>
+        {% endfor %}
+    </ul>
+    <button type="button"
+            class="add-another-collection-widget btn btn-primary btn-sm"
+            data-list-selector="#photo-gallery-list">+</button>
+
+    {% do advertForm.gallery.setRendered %}
+
+    {{ form_rest(advertForm) }}
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/admin/js/collection-type.js') }}"></script>
+{% endblock javascripts %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/custom.css') }}">
+{% endblock stylesheets %}

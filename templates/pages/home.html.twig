@@ -21,7 +21,7 @@
                     {% for advert in adverts %}
                         <div class="col-md-4">
                             <div class="hover-item mb30">
-                                <img src="{{ advert.gallery.photos.first.url }}" class="img-responsive smoothie" alt="">
+                                <img src="{{ advert.gallery.photos | length ? advert.gallery.photos.first.url : 'https://static.dreamland.be/wcsstore/ColruytB2CCAS/JPG/JPG/200x310/std.lang.all/50/32/asset-1885032.jpg'  }}" class="img-responsive smoothie" alt="">
                                 <div class="overlay-item-caption smoothie"></div>
                                 <div class="hover-item-caption smoothie">
                                     <div class="vertical-center smoothie">

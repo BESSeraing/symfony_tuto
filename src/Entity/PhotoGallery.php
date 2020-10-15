@@ -20,7 +20,7 @@ class PhotoGallery
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="gallery", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="gallery", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $photos;
 

@@ -19,12 +19,5 @@ class UserController extends AbstractController
         return new Response("<h1>Mon compte</h1>");
     }
 
-    /**
-     * @Route("/advert", name="createAdvert")
-     */
-    public function createAdvert() {
-
-        return new Response("<h1>Nouvelle annonce</h1>");
-    }
 
 }

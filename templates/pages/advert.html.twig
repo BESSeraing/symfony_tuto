@@ -66,6 +66,9 @@
                                         <a href="{{ url('showByTag', {name: tag.name}) }}" class="btn btn-secondary">{{ tag.name }}</a>
                                     {% endfor %}
                                 </div>
+                                <div>
+                                    <a href="{{ url('editAdvert', {id: advert.id}) }}" class="btn btn-primary"> Edit</a>
+                                </div>
 
                             </div>
                         </div>
