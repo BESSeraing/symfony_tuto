@@ -4,15 +4,25 @@ namespace App\Form;
 
 use App\Entity\Photo;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
 
 class PhotoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url')
+            ->add('image', FileType::class, [
+                'required' => true,
+                'mapped' => false,
+                'constraints' => [
+                    new Image([
+                        'maxSize' => '1024k'
+                    ])
+                ],
+            ])
         ;
     }
 

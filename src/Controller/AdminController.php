@@ -10,6 +10,7 @@ use App\Entity\Photo;
 use App\Entity\PhotoGallery;
 use App\Form\AdvertType;
 use App\Repository\CategoryRepository;
+use App\Service\AdvertPhotoUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +50,7 @@ class AdminController extends AbstractController
     /**
      * @Route("advert/create", name="createAdvert")
     */
-    public function createAdvert(Request $request, EntityManagerInterface $entityManager) {
+    public function createAdvert(Request $request, EntityManagerInterface $entityManager, AdvertPhotoUploader $advertPhotoUploader) {
         $advert = new Advert();
         $advert->setYear(\DateTime::createFromFormat('Y', date('Y')));
 
@@ -59,13 +60,9 @@ class AdminController extends AbstractController
         $form = $this->createForm(AdvertType::class, $advert);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $advertPhotoUploader->uploadFilesFromForm($form->get('gallery'));
             $entityManager->persist($advert);
-
-            foreach ($gallery->getPhotos() as $photo) {
-                $photo->setGallery($gallery);
-            }
-
             $entityManager->flush();
 
             return $this->redirectToRoute("showAdvert", ["slug" => $advert->getSlug()]);
