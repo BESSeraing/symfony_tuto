@@ -17,10 +17,6 @@ class AdvertType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-
-
-
-
         // Pas besoin du champ slug il est autogénéré sur base du title tout comme creationDate
         $builder
             ->add('title')

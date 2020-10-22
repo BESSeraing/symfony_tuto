@@ -81,8 +81,8 @@ class AdminController extends AbstractController
     public function editAdvert(Advert $advert, Request $request, EntityManagerInterface $entityManager) {
 
         $form = $this->createForm(AdvertType::class, $advert);
+        
         $form->handleRequest($request);
-
         if ($form->isSubmitted()) {
             $entityManager->persist($advert);
 
