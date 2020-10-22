@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AdvertRepository::class)
@@ -23,6 +24,8 @@ class Advert
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
+     * @Assert\Length(min="20")
      */
     private $title;
 
@@ -38,6 +41,7 @@ class Advert
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min="50")
      */
     private $description;
 
@@ -55,6 +59,7 @@ class Advert
     /**
      * @ORM\OneToOne(targetEntity=PhotoGallery::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $gallery;
 

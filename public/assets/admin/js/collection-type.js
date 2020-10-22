@@ -3,6 +3,9 @@ $(document).ready(function () {
     $($('.add-another-collection-widget').attr('data-list-selector'))
         .find('input').after(createButton());
 
+    $($('.add-another-collection-widget').attr('data-list-selector'))
+        .find('.existantPhotos').append(createButton());
+
     $('.add-another-collection-widget').click(function (e) {
         var list = $($(this).attr('data-list-selector'));
         // Try to find the counter of the list or use the length of the list

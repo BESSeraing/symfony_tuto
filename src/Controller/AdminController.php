@@ -75,12 +75,13 @@ class AdminController extends AbstractController
     /**
      * @Route("advert/edit/{id}", name="editAdvert")
     */
-    public function editAdvert(Advert $advert, Request $request, EntityManagerInterface $entityManager) {
+    public function editAdvert(Advert $advert, Request $request, EntityManagerInterface $entityManager, AdvertPhotoUploader $advertPhotoUploader) {
 
         $form = $this->createForm(AdvertType::class, $advert);
         
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $advertPhotoUploader->uploadFilesFromForm($form->get('gallery'));
             $entityManager->persist($advert);
 
             foreach ($advert->getGallery()->getPhotos() as $photo) {

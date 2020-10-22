@@ -19,14 +19,19 @@
     {{ form_row(advertForm.tags) }}
 
     {{ form_label(advertForm.gallery) }}
+{#    {{ form_row(advertForm.gallery.photos) }}#}
+    {{ form_errors(advertForm.gallery.photos) }}
+
+
     <ul id="photo-gallery-list" class="collection-form"
         data-prototype="{{ form_widget(advertForm.gallery.photos.vars.prototype)|e }}"
         data-widget-tags="{{ '<li></li>'|e }}"
         data-widget-counter="{{ advertForm.gallery.photos | length }}">
         {% for photoField in advertForm.gallery.photos %}
-            <li>
-                {{ form_widget(photoField) }}
-                {{ form_errors(photoField) }}
+            <li class="existantPhotos">
+{#                le .value me retourne l'entité liée au champ de formulaire (une entité Photo)#}
+                <img src="{{ asset('uploads/'~photoField.vars.value.url) }}" alt="" width="100">
+                {{ form_widget(photoField, {'attr': {'class': 'd-none'}}) }}
             </li>
         {% endfor %}
     </ul>

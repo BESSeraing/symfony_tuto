@@ -6,6 +6,7 @@ use App\Repository\PhotoGalleryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PhotoGalleryRepository::class)
@@ -21,6 +22,7 @@ class PhotoGallery
 
     /**
      * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="gallery", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @Assert\Count(min="1")
      */
     private $photos;
 
