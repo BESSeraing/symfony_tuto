@@ -86,29 +86,29 @@ $(document).ready(function(){
 
     $('.vertical-center').flexVerticalCenter({ cssAttribute: 'padding-top' });
 
-    //CONTACT FORM
-    $('#contactform').submit(function(){
-      var action = $(this).attr('action');
-      $("#message").slideUp(750,function() {
-      $('#message').hide();
-      $('#submit').attr('disabled','disabled');
-      $.post(action, {
-        name: $('#name').val(),
-        email: $('#email').val(),
-        website: $('#website').val(),
-        comments: $('#comments').val()
-      },
-        function(data){
-          document.getElementById('message').innerHTML = data;
-          $('#message').slideDown('slow');
-          $('#submit').removeAttr('disabled');
-          if(data.match('success') != null) $('#contactform').slideUp('slow');
-          $(window).trigger('resize');
-        }
-      );
-      });
-      return false;
-    });
+    // //CONTACT FORM
+    // $('#contactform').submit(function(){
+    //   var action = $(this).attr('action');
+    //   $("#message").slideUp(750,function() {
+    //   $('#message').hide();
+    //   $('#submit').attr('disabled','disabled');
+    //   $.post(action, {
+    //     name: $('#name').val(),
+    //     email: $('#email').val(),
+    //     website: $('#website').val(),
+    //     comments: $('#comments').val()
+    //   },
+    //     function(data){
+    //       document.getElementById('message').innerHTML = data;
+    //       $('#message').slideDown('slow');
+    //       $('#submit').removeAttr('disabled');
+    //       if(data.match('success') != null) $('#contactform').slideUp('slow');
+    //       $(window).trigger('resize');
+    //     }
+    //   );
+    //   });
+    //   return false;
+    // });
 
     $(".rotate").textrotator({
       animation: "dissolve",
@@ -201,10 +201,10 @@ $(document).ready(function(){
         }
     });
     
-    $('form').submit(function(event) {
-        event.preventDefault();
-        return false;
-    })
+    // $('form').submit(function(event) {
+    //     event.preventDefault();
+    //     return false;
+    // })
 
     // ONEPAGER //
     $('a.page-scroll').on('click', function(event){
