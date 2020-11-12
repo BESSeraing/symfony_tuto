@@ -3,9 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Advert;
+use App\Entity\Category;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+
 
 /**
  * @method Advert|null find($id, $lockMode = null, $lockVersion = null)
@@ -38,11 +41,7 @@ class AdvertRepository extends ServiceEntityRepository
             ->setMaxResults($limit)
         ;
 
-        $qb->leftJoin('a.gallery', 'gallery')
-            ->addSelect('gallery')
-            ->leftJoin('gallery.photos', 'photos')
-            ->addSelect('photos')
-        ;
+        $this->leftJoinPhotos($qb);
 
         return $qb->getQuery()->getResult();
 
@@ -56,14 +55,30 @@ class AdvertRepository extends ServiceEntityRepository
             ->setMaxResults($limit)
         ;
 
+        $this->leftJoinPhotos($qb);
+
+        return $qb->getQuery()->getOneOrNullResult();
+
+    }
+
+    public function findByCategory(Category $category)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->where('a.category = :category')
+            ->setParameter('category', $category);
+
+        $this->leftJoinPhotos($qb);
+
+        return $qb->getQuery()->getResult();
+
+    }
+
+    private function leftJoinPhotos(QueryBuilder $qb): void {
         $qb->leftJoin('a.gallery', 'gallery')
             ->addSelect('gallery')
             ->leftJoin('gallery.photos', 'photos')
             ->addSelect('photos')
         ;
-
-        return $qb->getQuery()->getOneOrNullResult();
-
     }
 
     // /**
@@ -94,4 +109,5 @@ class AdvertRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }

@@ -19,6 +19,20 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findOneByName($name)
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->where('c.name = :name')
+            ->setParameter('name', $name);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     // /**
     //  * @return Category[] Returns an array of Category objects
     //  */
@@ -47,4 +61,5 @@ class CategoryRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }

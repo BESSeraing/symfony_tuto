@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Advert;
 use App\Repository\AdvertRepository;
+use App\Repository\CategoryRepository;
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -69,6 +70,21 @@ class DefaultController extends AbstractController
         $adverts = $advertRepository->findByTag($tag);
 
         return $this->render('pages/tag.html.twig', ['tag' => $tag, 'adverts' => $adverts]);
+
+    }
+
+    /**
+     * @Route("/category/{name}", name="showByCategory")
+     */
+    public function categoryPage($name, CategoryRepository $categoryRepository, AdvertRepository $advertRepository) {
+        $category = $categoryRepository->findOneByName($name);
+        if ($category === null) {
+            throw new NotFoundHttpException("categoru does not exists");
+        }
+
+        $adverts = $advertRepository->findByCategory($category);
+
+        return $this->render('pages/categories.html.twig', ['category' => $category, 'adverts' => $adverts]);
 
     }
     
