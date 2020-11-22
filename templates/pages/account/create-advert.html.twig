@@ -1,0 +1,56 @@
+{% extends 'layouts/account-layout.html.twig' %}
+{% block accountTitle %}
+    Chouette, une nouvelle annonce !
+{% endblock %}
+{% block accountContent %}
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.year.year) }}
+    {{ form_widget(form.year.month, {attr: {class: 'hidden'}}) }}
+    {{ form_widget(form.year.day, {attr: {class: 'hidden'}}) }}
+    {{ form_row(form.category) }}
+    {{ form_row(form.frameSize) }}
+    {{ form_row(form.frameType) }}
+    {{ form_row(form.material) }}
+    {{ form_row(form.wheelSize) }}
+    {{ form_row(form.fork) }}
+    {{ form_row(form.tags) }}
+
+
+    {#    {{ form_row(form.gallery.photos) }}#}
+
+    <fieldset class="form-group row">
+        {{ form_label(form.gallery) }}
+        <div class="col-sm-10">
+            {{ form_errors(form.gallery.photos) }}
+            <ul id="photo-gallery-list" class="collection-form list-unstyled"
+                data-prototype="{{ form_widget(form.gallery.photos.vars.prototype)|e }}"
+                data-widget-tags="{{ '<li></li>'|e }}"
+                data-widget-counter="{{ form.gallery.photos | length }}">
+                {% for photoField in form.gallery.photos %}
+                    <li class="existantPhotos">
+                        {#                le .value me retourne l'entité liée au champ de formulaire (une entité Photo)#}
+                        <img src="{{ asset('uploads/'~photoField.vars.value.url) }}" alt="" width="100">
+                        {{ form_widget(photoField, {'attr': {'class': 'd-none'}}) }}
+                    </li>
+                {% endfor %}
+            </ul>
+            <button type="button"
+                    class="add-another-collection-widget btn btn-primary btn-sm"
+                    data-list-selector="#photo-gallery-list">+</button>
+        </div>
+    {% do form.gallery.setRendered %}
+    </fieldset>
+    {% do form.year.setRendered %}
+
+    {{ form_rest(form) }}
+{% endblock accountContent %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/admin/js/collection-type.js') }}"></script>
+{% endblock javascripts %}
+

@@ -2,24 +2,27 @@
 {% extends 'layouts/layout.html.twig' %}
 
 {% block header %}
-<section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="assets/img/bg/bg2.jpg" data-speed="0.7">
-    <div class="section-inner pad-top-200">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 mt30 wow text-center">
-                    <h2 class="section-heading">VTT - Cross Country - Semi-rigide </h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+{#<section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="assets/img/bg/bg2.jpg" data-speed="0.7">#}
+{#    <div class="section-inner pad-top-200">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-lg-12 mt30 wow text-center">#}
+{#                    <h2 class="section-heading">VTT - Cross Country - Semi-rigide </h2>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
 {% endblock header %}
 {% block content %}
 <section>
     <div class="section-inner">
         <div class="container">
+            <div class="row mb50" >
+                <h1 class="mt0"> {{advert.title}}</h1>
+            </div>
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-md-8">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 mb50">
                             <div class="images">
@@ -48,13 +51,12 @@
 
                         <div class="col-xs-12 col-sm-6 mb50">
                             <div class="summary entry-summary">
-                                <h1 class="mt0"> {{advert.title}}</h1>
+
                                 <div>
                                     <p class="price">
 {#                                            <del><span class="amount">£3.00</span>#}
 {#                                            </del>#}
-                                        <ins><span class="amount">{{advert.price}} €</span>
-                                        </ins>
+                                        <ins><span class="amount">{{advert.price}} €</span></ins>                                        </ins>
                                     </p>
                                 </div>
 
@@ -75,10 +77,8 @@
 
                         <div class="col-md-12 product-tabs mt">
                             <ul class="nav nav-tabs">
-
-
                                 <li class="active">
-                                    <a data-toggle="tab" href="#tab-reviews">Questions (3)</a>
+                                    <a data-toggle="tab" href="#tab-reviews">Questions ({{ advert.questions | length }})</a>
                                 </li>
                             </ul>
 
@@ -87,190 +87,102 @@
                                 <div class="tab-pane active" id="tab-reviews">
                                     <div id="reviews">
                                         <div id="comments">
-                                            <div id="comments-list" class="gap">
+                                            <div id="comments-list" data-answer-form='{{ form(answerForm) }}'  class="gap">
                                                 <div class="media">
-                                                    <div class="pull-left">
-                                                        <img class="avatar comment-avatar" src="http://lorempixel.com/80/80/people/9" alt="">
-                                                    </div>
-                                                    <div class="media-body">
+                                                    {% for question in advert.questions %}
+{#                                                    <div class="pull-left">#}
+{#                                                        <img class="avatar comment-avatar" src="http://lorempixel.com/80/80/people/9" alt="">#}
+{#                                                    </div>#}
+                                                    <div class="media-body" data-id="{{ question.id }}">
                                                         <div class="well">
                                                             <div class="media-heading">
-                                                                <strong>Dave Evans</strong>&nbsp; <small>30th Jan, 2015</small>
-                                                                <div class="pull-right">
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                </div>
+                                                                {% if app.user.id == advert.createdBy.id %}<strong>{{ question.createdBy.email }}</strong>{% endif %}&nbsp; <small>{{ question.creationDate | date }}</small>
                                                             </div>
-                                                            <p>Was are delightful solicitude discovered collecting man day. Resolving neglected sir tolerably but existence conveying for. Day his put off unaffected literature partiality inhabiting.</p>
+                                                            <p>{{ question.content |nl2br }}</p>
+                                                            {% for answer in question.answers %}
+                                                                {% include 'pages/element/answer.html.twig' %}
+                                                            {% endfor %}
+                                                            {% if app.user == advert.createdBy %}
+                                                                <p><a class="responseCall" href="#">Répondre</a></p>
+                                                            {% endif %}
                                                         </div>
+
                                                     </div>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="pull-left">
-                                                        <img class="avatar comment-avatar" src="http://lorempixel.com/80/80/people/5" alt="">
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div class="well">
-                                                            <div class="media-heading">
-                                                                <strong>Dave Evans</strong>&nbsp; <small>30th Jan, 2015</small>
-                                                                <div class="pull-right">
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                </div>
-                                                            </div>
-                                                            <p>Wicket longer admire do barton vanity itself do in it. Preferred to sportsmen it engrossed listening. Park gate sell they west hard for the. Abode stuff noisy manor blush yet the far. Up colonel so between removed so do.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="pull-left">
-                                                        <img class="avatar comment-avatar" src="http://lorempixel.com/80/80/people/6" alt="">
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div class="well">
-                                                            <div class="media-heading">
-                                                                <strong>Dave Evans</strong>&nbsp; <small>30th Jan, 2015</small>
-                                                                <div class="pull-right">
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                </div>
-                                                            </div>
-                                                            <p>Quitting informed concerns can men now. Projection to or up conviction uncommonly delightful continuing. In appetite ecstatic opinions hastened by handsome admitted.</p>
-                                                        </div>
-                                                    </div>
+                                                    {% endfor %}
                                                 </div>
                                             </div>
-
+                                            {% if app.user != advert.createdBy %}
                                             <div id="comment-form" class="gap">
                                                 <div class="mb">
                                                     <h3 class="single-section-title">Poser une question</h3>
                                                 </div>
-                                                <form class="form-horizontal" role="form">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <textarea rows="8" class="form-control" placeholder="Votre question"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-theme">Submit Comment</button>
-                                                </form>
+                                                {% if app.user %}
+                                                {{ form_start(form) }}
+                                                {{ form_widget(form.content) }}
+                                                {{ form_widget(form.submit) }}
+                                                {{ form_rest(form) }}
+                                                {% else %}
+                                                    <a href="{{ url("app_login") }}">Log in</a> or <a href="{{ url("register") }}">register</a> to ask a question.
+                                                {% endif %}
+
                                             </div>
+                                            {% endif %}
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-12">
-                            <div class="mb50">
-                                <h3 class="single-section-title">Related Items</h3>
-                            </div>
-
-                            <div class="row">
-                                <ul class="owl-carousel-paged wow fadeIn list-unstyled" data-items="2" data-items-tablet="[768,2]" data-items-mobile="[479,1]">
-                                    <li class="nopadding-lr">
-                                        <div class="hover-item mb30">
-                                            <img src="assets/img/shop/shop1.jpg" class="img-responsive smoothie" alt="">
-                                            <div class="overlay-item-caption smoothie"></div>
-                                            <div class="hover-item-caption smoothie">
-                                                <div class="vertical-center smoothie">
-                                                    <a href="#" class="smoothie btn btn-primary">View</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-excerpt">
-                                            <h4 class="pull-right">$24.99</h4>
-                                            <h4><a href="#">Slim-Fit Shirt</a></h4>
-                                            <p>Taste oh spoke about no solid of hills up shade. Occasion so bachelor humoured striking by attended doubtful be it.</p>
-                                        </div>
-                                    </li>
-                                    <li class="nopadding-lr">
-                                        <div class="hover-item mb30">
-                                            <img src="assets/img/shop/shop2.jpg" class="img-responsive smoothie" alt="">
-                                            <div class="overlay-item-caption smoothie"></div>
-                                            <div class="hover-item-caption smoothie">
-                                                <div class="vertical-center smoothie">
-                                                    <a href="#" class="smoothie btn btn-primary">View</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-excerpt">
-                                            <h4 class="pull-right">$24.99</h4>
-                                            <h4><a href="#">Slim-Fit Shirt</a></h4>
-                                            <p>Taste oh spoke about no solid of hills up shade. Occasion so bachelor humoured striking by attended doubtful be it.</p>
-                                        </div>
-                                    </li>
-                                    <li class="nopadding-lr">
-                                        <div class="hover-item mb30">
-                                            <img src="assets/img/shop/shop3.jpg" class="img-responsive smoothie" alt="">
-                                            <div class="overlay-item-caption smoothie"></div>
-                                            <div class="hover-item-caption smoothie">
-                                                <div class="vertical-center smoothie">
-                                                    <a href="#" class="smoothie btn btn-primary">View</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-excerpt">
-                                            <h4 class="pull-right">$24.99</h4>
-                                            <h4><a href="#">Slim-Fit Shirt</a></h4>
-                                            <p>Taste oh spoke about no solid of hills up shade. Occasion so bachelor humoured striking by attended doubtful be it.</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
+
                 <div id="main-sidebar" class="col-md-3 col-md-offset-1 divider-wrapper wow fadeIn" data-wow-delay="0.5s">
                     <div>
                         <div class="widget">
-{#                                <h4 class="widget-title"><strong>Latest</strong> Products</h4>#}
+                            {#                                <h4 class="widget-title"><strong>Latest</strong> Products</h4>#}
                             <div>
                                 <dl>
                                     <dt>
                                         Année
                                     </dt>
                                     <dd>
-                                        2018
+                                        {{ advert.year | date('Y') }}
                                     </dd>
                                     <dt>
                                         Categorie
                                     </dt>
                                     <dd>
-                                        Cross Country
+                                        <a href="{{ url('showByCategory', {name: advert.category.name}) }}"></a>
                                     </dd>
                                     <dt>
                                         Taille cadre
                                     </dt>
                                     <dd>
-                                        L
+                                        {{ advert.frameSize }}
                                     </dd>
                                     <dt>
                                         Fourche
                                     </dt>
                                     <dd>
-                                        Fox 32 float
+                                        {{ advert.fork ? advert.fork : '-'  }}
                                     </dd>
                                     <dt>
                                         Materiau cadre
                                     </dt>
                                     <dd>
-                                        Carbon
+                                        {{ advert.material }}
                                     </dd>
                                     <dt>
                                         Taille roues
                                     </dt>
                                     <dd>
-                                        29"
+                                        {{ advert.wheelSize }}
+                                    </dd>
+                                    <dt>
+                                        Type de cadre
+                                    </dt>
+                                    <dd>
+                                        {{ advert.frameType }}
                                     </dd>
 
                                 </dl>
@@ -279,8 +191,48 @@
                         </div>
                     </div>
                 </div>
+
             </div>
+
         </div>
     </div>
 </section>
 {% endblock content %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+    $('.responseCall').click((e) => {
+        e.preventDefault();
+
+        let caller = $(e.target);
+        if (caller.parent().prev('form').length) {
+            caller.parent().prev('form').submit();
+        }
+        else {
+            // remove other forms
+            $('form[name="answer"]').remove();
+
+            let form = $($('#comments-list').data('answer-form'));
+            form.find('.col-sm-2').hide();
+
+            form.find('select').val(caller.parents('.media-body').data('id'));
+            $(e.target).parent('p').before(form);
+
+            form.submit((e) => {
+                e.preventDefault();
+                $.post(
+                    form.attr('action'),
+                    form.serialize(),
+                    function(data){
+                        form.before(data);
+                        form.remove();
+                    }
+                );
+            })
+        }
+
+    });
+</script>
+
+{% endblock %}

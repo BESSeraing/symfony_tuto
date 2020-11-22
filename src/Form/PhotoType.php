@@ -17,6 +17,7 @@ class PhotoType extends AbstractType
             ->add('image', FileType::class, [
                 'required' => false,
                 'mapped' => false,
+                'label' => false,
                 'constraints' => [
                     new Image([
                         'maxSize' => '1024k'

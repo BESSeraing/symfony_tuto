@@ -19,6 +19,7 @@ class PhotoGalleryType extends AbstractType
                     'allow_add' => true,
                     'allow_delete' => true,
                     'error_bubbling' => false,
+                    'label' => false,
                     'entry_type' => PhotoType::class
                 ]
             )

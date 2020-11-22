@@ -6,6 +6,7 @@ use App\Entity\Advert;
 use App\Entity\Category;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -73,6 +74,39 @@ class AdvertRepository extends ServiceEntityRepository
 
     }
 
+    public function findByCategoryPaged(Category $category, int $page, int $pageLength)
+    {
+        $offset = (($page -1 ) * $pageLength) ;
+
+        $qb = $this->createQueryBuilder('a')
+            ->where('a.category = :category')
+            ->setParameter('category', $category)
+            ->setMaxResults($pageLength)
+            ->setFirstResult($offset)
+        ;
+
+        $this->leftJoinPhotos($qb);
+
+        return $qb->getQuery()->getResult();
+
+    }
+
+    /**
+     * @param $category
+     * @return \Doctrine\ORM\Query
+     */
+    public function findByCategoryQb($category): Query
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->where('a.category = :category')
+            ->setParameter('category', $category)
+        ;
+
+        $this->leftJoinPhotos($qb);
+
+        return $qb->getQuery();
+    }
+
     private function leftJoinPhotos(QueryBuilder $qb): void {
         $qb->leftJoin('a.gallery', 'gallery')
             ->addSelect('gallery')
@@ -109,5 +143,6 @@ class AdvertRepository extends ServiceEntityRepository
         ;
     }
     */
+
 
 }

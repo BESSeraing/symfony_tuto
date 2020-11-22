@@ -1,0 +1,22 @@
+{% extends 'layouts/layout.html.twig' %}
+{% block content %}
+<section>
+    <div class="section-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="row">
+                        <h1 class="mb30">{% block accountTitle %}{% endblock accountTitle %}</h1>
+                        {% block accountContent %}{% endblock accountContent %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+

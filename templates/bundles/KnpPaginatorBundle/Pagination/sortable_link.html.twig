@@ -1,0 +1,4 @@
+<a class="btn btn-primary" {% for attr, value in options %} {{ attr }}="{{ value }}"{% endfor %}>{{ title }}
+<span class=" {{ options.class == 'desc' ?  'pe-7s-angle-up' : 'pe-7s-angle-down'}}"></span>
+</a>
+{#{{ dump(options) }}#}

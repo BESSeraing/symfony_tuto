@@ -1633,14 +1633,14 @@ footer.white-wrapper .social-links li a {
     display: block;
     width: 100%;
     height: 40px;
-    padding: 30px 30px;
+    /*padding: 30px 30px;*/
     font-size: 14px;
     line-height: 1.42857143;
     color: #222;
     background-color: transparent;
     background-image: none;
-    border: none;
-    border-bottom: 3px solid #222;
+    /*border: none;*/
+    /*border-bottom: 3px solid #222;*/
     border-radius: 0;
     -webkit-box-shadow: none;
     box-shadow: none
@@ -2412,4 +2412,16 @@ footer.white-wrapper .social-links li a {
 
 .demo-selector .masonry-portfolio-item {
     margin-bottom: 30px;
+}
+
+a.btn.current { color: #999999;}
+a.page-link {padding-left: 1rem;padding-right: 1rem;}
+
+legend.col-form-label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+    border:0;
+    font-size: 1em;
 }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Constants\FrameSize;
 use App\Repository\AdvertRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,6 +16,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Advert
 {
+//    const FAME_SIZES = FrameSize::values();
+
+    use AuditableTrait;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -33,11 +38,6 @@ class Advert
      * @ORM\Column(type="float")
      */
     private $price;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $creationDate;
 
     /**
      * @ORM\Column(type="text")
@@ -69,15 +69,44 @@ class Advert
     private $year;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $lastUpdate;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Gedmo\Slug(fields={"title"})
      */
     private $slug;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Choice(callback={"App\Entity\Constants\FrameSize", "values"}, message="Choose a valid size.")
+     */
+    private $frameSize;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fork;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Choice(callback={"App\Entity\Constants\Material", "values"}, message="Choose a valid material.")
+     */
+    private $material;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\Choice(callback={"App\Entity\Constants\WheelSize", "values"}, message="Choose a valid size.")
+    */
+    private $wheelSize;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Choice(callback={"App\Entity\Constants\FrameType", "values"}, message="Choose a valid type.")
+     */
+    private $frameType;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Question::class, mappedBy="advert")
+     */
+    private $questions;
 
     /**
      * @ORM\PrePersist()
@@ -96,6 +125,7 @@ class Advert
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -233,6 +263,97 @@ class Advert
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getFrameSize(): ?string
+    {
+        return $this->frameSize;
+    }
+
+    public function setFrameSize(string $frameSize): self
+    {
+        $this->frameSize = $frameSize;
+
+        return $this;
+    }
+
+    public function getFork(): ?string
+    {
+        return $this->fork;
+    }
+
+    public function setFork(?string $fork): self
+    {
+        $this->fork = $fork;
+
+        return $this;
+    }
+
+    public function getMaterial(): ?string
+    {
+        return $this->material;
+    }
+
+    public function setMaterial(string $material): self
+    {
+        $this->material = $material;
+
+        return $this;
+    }
+
+    public function getWheelSize(): ?int
+    {
+        return $this->wheelSize;
+    }
+
+    public function setWheelSize(int $wheelSize): self
+    {
+        $this->wheelSize = $wheelSize;
+
+        return $this;
+    }
+
+    public function getFrameType(): ?string
+    {
+        return $this->frameType;
+    }
+
+    public function setFrameType(string $frameType): self
+    {
+        $this->frameType = $frameType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Question[]
+     */
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
+
+    public function addQuestion(Question $question): self
+    {
+        if (!$this->questions->contains($question)) {
+            $this->questions[] = $question;
+            $question->setAdvert($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestion(Question $question): self
+    {
+        if ($this->questions->contains($question)) {
+            $this->questions->removeElement($question);
+            // set the owning side to null (unless already changed)
+            if ($question->getAdvert() === $this) {
+                $question->setAdvert(null);
+            }
+        }
 
         return $this;
     }

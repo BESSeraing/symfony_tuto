@@ -3,3 +3,5 @@ stof_doctrine_extensions:
   orm:
     default:
       sluggable: true
+      blameable: true
+      timestampable: true

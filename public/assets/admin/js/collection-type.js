@@ -26,7 +26,8 @@ $(document).ready(function () {
         var newElem = $(list.attr('data-widget-tags')).html(newWidget);
         var button = createButton();
         newElem.find('input').after(button);
-
+        newElem.find('.col-sm-2').remove();
+        newElem.find('.col-sm-10').removeClass('col-sm-10');
         newElem.appendTo(list);
     });
 
