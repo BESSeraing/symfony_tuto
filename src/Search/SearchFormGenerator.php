@@ -4,6 +4,7 @@
 namespace App\Search;
 
 
+use App\Form\SearchFormType;
 use App\Form\SearchType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -31,7 +32,7 @@ class SearchFormGenerator
      * @return FormView
      */
     public function generateForm(): FormView {
-        $form = $this->formFactory->create(SearchType::class, null, ['action' => $this->urlGenerator->generate('search')]);
+        $form = $this->formFactory->create(SearchFormType::class, null, ['action' => $this->urlGenerator->generate('search')]);
         return $form->createView();
     }
 

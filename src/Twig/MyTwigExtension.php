@@ -6,6 +6,7 @@ namespace App\Twig;
 
 use App\Service\Menu\Menu;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class MyTwigExtension extends AbstractExtension
@@ -29,6 +30,5 @@ class MyTwigExtension extends AbstractExtension
             new TwigFunction('getMenu', [$this->menuService, 'getMenu'])
         ];
     }
-
 
 }

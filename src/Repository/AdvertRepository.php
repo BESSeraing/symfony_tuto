@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Advert;
 use App\Entity\Category;
+use App\Entity\Search;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
@@ -114,6 +115,81 @@ class AdvertRepository extends ServiceEntityRepository
             ->addSelect('photos')
         ;
     }
+
+    // Search
+
+    public function findSearchResults(Search $search) {
+        $qb = $this->createQueryBuilder('a');
+        if($search->getKeyword() !== null) {
+            $this->keywordCriteria($qb, $search->getKeyword());
+        }
+        if ($search->getCategories() !== null && count($search->getCategories())) {
+            $this->categroryCriteria($qb, $search->getCategories());
+        }
+        if ($search->getTags() !== null && count($search->getTags())) {
+            $this->tagCriteria($qb, $search->getTags());
+        }
+        if ($search->getFrameSizes() !== null && count($search->getFrameSizes())) {
+            $this->frameSizeCriteria($qb, $search->getFrameSizes());
+        }
+        if ($search->getFrameTypes() !== null && count($search->getFrameTypes())) {
+            $this->frameTypeCriteria($qb, $search->getFrameTypes());
+        }
+        if ($search->getPriceMax() !== null) {
+            $this->priceMaxCriteria($qb, $search->getPriceMax());
+        }
+        if ($search->getPriceMin() !== null) {
+            $this->priceMinCriteria($qb, $search->getPriceMin());
+        }
+
+        $this->leftJoinPhotos($qb);
+
+        return $qb->getQuery();
+    }
+
+    private function priceMaxCriteria(QueryBuilder $qb, float $priceMax): void {
+        $qb ->andWhere('a.price <= :priceMax')
+            ->setParameter('priceMax', $priceMax)
+        ;
+    }
+
+    private function priceMinCriteria(QueryBuilder $qb, float $priceMin): void {
+        $qb ->andWhere('a.price >= :priceMin')
+            ->setParameter('priceMin', $priceMin)
+        ;
+    }
+
+    private function frameTypeCriteria(QueryBuilder $qb, array $frameTypes): void {
+        $qb ->andWhere('a.frameType in (:frametypes)')
+            ->setParameter('frametypes', $frameTypes)
+        ;
+    }
+
+    private function frameSizeCriteria(QueryBuilder $qb, array $frameSizes): void {
+        $qb ->andWhere('a.frameSize in (:framesizes)')
+            ->setParameter('framesizes', $frameSizes)
+        ;
+    }
+    private function tagCriteria(QueryBuilder $qb, array $tags): void {
+        $qb->leftJoin('a.tags', 't')
+            ->andWhere('t in (:tags)')
+            ->setParameter('tags', $tags)
+        ;
+    }
+
+    private function categroryCriteria(QueryBuilder $qb, array $categories): void {
+        $qb->leftJoin('a.category', 'c')
+            ->andWhere('c in (:categories)')
+            ->setParameter('categories', $categories)
+        ;
+    }
+
+    private function keywordCriteria(QueryBuilder $qb, string $keyword): void {
+        $qb ->andWhere('a.title like :keyword')
+            ->setParameter('keyword', "%".$keyword."%");
+        ;
+    }
+    // End Search
 
     // /**
     //  * @return Advert[] Returns an array of Advert objects

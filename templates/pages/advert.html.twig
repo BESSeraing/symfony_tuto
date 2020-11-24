@@ -96,7 +96,7 @@
                                                     <div class="media-body" data-id="{{ question.id }}">
                                                         <div class="well">
                                                             <div class="media-heading">
-                                                                {% if app.user.id == advert.createdBy.id %}<strong>{{ question.createdBy.email }}</strong>{% endif %}&nbsp; <small>{{ question.creationDate | date }}</small>
+                                                                {% if app.user == advert.createdBy %}<strong>{{ question.createdBy.email }}</strong>{% endif %}&nbsp; <small>{{ question.creationDate | date }}</small>
                                                             </div>
                                                             <p>{{ question.content |nl2br }}</p>
                                                             {% for answer in question.answers %}
