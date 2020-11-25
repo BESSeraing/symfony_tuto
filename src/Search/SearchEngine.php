@@ -28,12 +28,13 @@ class SearchEngine
 
 
     public function getResults(Search $searchQuery, $page = 1): SearchResult {
+//        dump($searchQuery);
         $resultsQuery = $this->advertRepository->findSearchResults($searchQuery);
 
         $pageResult = $this->paginator->paginate(
             $resultsQuery, /* query NOT result */
             $page, /*page number*/
-            2 /*limit per page*/
+            6 /*limit per page*/
         );
 
         return new SearchResult($pageResult, $searchQuery);

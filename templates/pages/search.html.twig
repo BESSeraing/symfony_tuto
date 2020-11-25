@@ -1,4 +1,6 @@
 {% extends 'layouts/layout.html.twig' %}
+{% import 'macros/advert-macros.html.twig' as advertElements %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block header %}
     <section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="assets/img/bg/bg2.jpg" data-speed="0.7">
@@ -6,7 +8,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 mt30 wow text-center">
-                        <h2 class="section-heading">Résultats pour la recherche "Scott scale 910"</h2>
+                        <h2 class="section-heading">Résultats de recherche</h2>
                     </div>
                 </div>
             </div>
@@ -15,7 +17,6 @@
 {% endblock header %}
 
 {% block content %}
-
     <section>
         <div class="section-inner">
             <div class="container">
@@ -41,36 +42,46 @@
 
                     </div>
                     <div class="col-sm-8 col-sm-offset-1">
+                        <div class="row">
                         {% for advert in result.results.items %}
-                        <div class="col-sm-6 blog-item mb100 wow match-height">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="hover-item mb30">
-                                        {% if advert.gallery.photos | length %}
-                                        <img src="{{ asset('uploads/'~advert.gallery.photos[0].url) }}" class="img-responsive smoothie" alt="title">
-                                        {% endif %}
-                                        <div class="overlay-item-caption smoothie"></div>
-                                        <div class="hover-item-caption smoothie">
-                                            <h3 class="vertical-center smoothie"><a href="single-post-right-sidebar.html" class="smoothie btn btn-primary page-scroll" title="view article">View</a></h3>
-                                        </div>
-                                    </div>
-                                    <h2 class="post-title">{{advert.title}}</h2>
-                                    <div class="item-metas text-muted mb30">
-                                        <span class="meta-item"><i class="pe-icon pe-7s-folder"></i> POSTED IN <span>News</span></span>
-                                        <span class="meta-item"><i class="pe-icon pe-7s-user"></i> AUTHOR <span>Danny Jones</span></span>
-                                    </div>
-                                    <p>Behind sooner dining so window excuse he summer. Breakfast met certainty and fulfilled propriety led. Waited get either are wooded little her. Contrasted unreserved as mr particular collecting it everything as indulgence. Seems ask meant merry could put. Age old begin had boy noisy table front whole given.</p>
-                                    <a class="btn btn-primary mt30" href="single-post-right-sidebar.html">Read More</a>
-                                </div>
-                            </div>
-                        </div>
+                            {{ advertElements.advert_block(advert, 6) }}
+{#                        <div class="col-sm-6 blog-item mb100 wow match-height">#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-12">#}
+{#                                    <div class="hover-item mb30">#}
+{#                                        {% if advert.gallery.photos | length %}#}
+{#                                        <img src="{{ asset('uploads/'~advert.gallery.photos[0].url) }}" class="img-responsive smoothie" alt="title">#}
+{#                                        {% endif %}#}
+{#                                        <div class="overlay-item-caption smoothie"></div>#}
+{#                                        <div class="hover-item-caption smoothie">#}
+{#                                            <h3 class="vertical-center smoothie"><a href="single-post-right-sidebar.html" class="smoothie btn btn-primary page-scroll" title="view article">View</a></h3>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <h2 class="post-title">{{advert.title}}</h2>#}
+{#                                    <div class="item-metas text-muted mb30">#}
+{#                                        <span class="meta-item"><i class="pe-icon pe-7s-folder"></i> POSTED IN <span>News</span></span>#}
+{#                                        <span class="meta-item"><i class="pe-icon pe-7s-user"></i> AUTHOR <span>Danny Jones</span></span>#}
+{#                                    </div>#}
+{#                                    <p>Behind sooner dining so window excuse he summer. Breakfast met certainty and fulfilled propriety led. Waited get either are wooded little her. Contrasted unreserved as mr particular collecting it everything as indulgence. Seems ask meant merry could put. Age old begin had boy noisy table front whole given.</p>#}
+{#                                    <a class="btn btn-primary mt30" href="single-post-right-sidebar.html">Read More</a>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
                         {% endfor %}
+                        </div>
+                        <div class="row tb50">
+{#                            {{ dump((result.results.totalItemCount/result.results.itemNumberPerPage + 1) | round(0, 'floor') ) }}#}
+                            {% for i in 1..(result.results.totalItemCount/result.results.itemNumberPerPage + 1) | round(0, 'floor')  %}
+                                <a href="{{ url(app.request.get('_route'), app.request.query.all() | merge({page: i}) )}}" class="page-link btn btn-sm btn-primary {{ i == app.request.get('page') ? 'current' : ''  }}">{{ i }}</a>
+                            {% endfor %}
+                        </div>
                     </div>
+
                 </div>
 
-                <div class="row paging text-center">
-                    <a class="btn btn-primary mt30" href="#">Older Posts</a>
-                </div>
+{#                <div class="row paging text-center">#}
+{#                    <a class="btn btn-primary mt30" href="#">Older Posts</a>#}
+{#                </div>#}
             </div>
         </div>
     </section>

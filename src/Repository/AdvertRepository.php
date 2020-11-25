@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Entity\Search;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -170,14 +171,14 @@ class AdvertRepository extends ServiceEntityRepository
             ->setParameter('framesizes', $frameSizes)
         ;
     }
-    private function tagCriteria(QueryBuilder $qb, array $tags): void {
+    private function tagCriteria(QueryBuilder $qb, ArrayCollection $tags): void {
         $qb->leftJoin('a.tags', 't')
             ->andWhere('t in (:tags)')
             ->setParameter('tags', $tags)
         ;
     }
 
-    private function categroryCriteria(QueryBuilder $qb, array $categories): void {
+    private function categroryCriteria(QueryBuilder $qb, ArrayCollection $categories): void {
         $qb->leftJoin('a.category', 'c')
             ->andWhere('c in (:categories)')
             ->setParameter('categories', $categories)

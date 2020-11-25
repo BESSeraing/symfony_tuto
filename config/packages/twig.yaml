@@ -5,5 +5,5 @@ twig:
     exception_controller: null
     form_themes: ['bootstrap_4_horizontal_layout.html.twig']
     globals:
-#        Inject service as var in templates
+#        Inject service as var in templates, pour avoir mon form generator depuis n'importe quel template
         search: '@App\Search\SearchFormGenerator'

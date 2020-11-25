@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7dbe73e5-5edc-4236-8809-fc7bc14cac89" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Search/SearchEngine.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Search/SearchResult.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SearchController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/SearchFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/SearchFormType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/AdvertRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/AdvertRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Search/SearchFormGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Search/SearchFormGenerator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Search/SearchQuery.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Twig/MyTwigExtension.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Twig/MyTwigExtension.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pages/advert.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/advert.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Search/SearchEngine.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Search/SearchEngine.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/macros/advert-macros.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/macros/advert-macros.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages/categories.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/categories.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/home.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/pages/search.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/search.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages/tag.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/tag.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -295,7 +295,7 @@
       <workItem from="1605783596062" duration="16630000" />
       <workItem from="1605859859269" duration="30000" />
       <workItem from="1605992060746" duration="21628000" />
-      <workItem from="1606215644679" duration="7698000" />
+      <workItem from="1606215644679" duration="12189000" />
     </task>
     <servers />
   </component>
@@ -342,12 +342,12 @@
       <screen x="0" y="12" width="1920" height="1068" />
     </state>
     <state x="510" y="17" width="899" height="1052" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.0.1920.1080/0.12.1920.1068@0.12.1920.1068" timestamp="1605794724288" />
-    <state x="635" y="242" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606082766921">
-      <screen x="0" y="24" width="1920" height="1056" />
+    <state x="635" y="232" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606231044466">
+      <screen x="0" y="12" width="1920" height="1068" />
     </state>
     <state x="635" y="242" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.24.1920.1056/0.24.1920.1056@0.24.1920.1056" timestamp="1601365182137" />
     <state x="635" y="242" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1606082766921" />
-    <state x="635" y="232" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.12.1920.1068@0.12.1920.1068" timestamp="1605172855136" />
+    <state x="635" y="232" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.12.1920.1068@0.12.1920.1068" timestamp="1606231044466" />
     <state x="697" y="231" key="FileChooserDialogImpl" timestamp="1602575248499">
       <screen x="0" y="12" width="1920" height="1068" />
     </state>
@@ -409,18 +409,18 @@
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state x="746" y="148" key="com.intellij.database.view.ui.DbObjectDialog/0.24.1920.1056/0.24.1920.1056@0.24.1920.1056" timestamp="1601541255346" />
-    <state x="307" y="34" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605996122405">
-      <screen x="0" y="24" width="1920" height="1056" />
+    <state x="307" y="24" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1606227823676">
+      <screen x="0" y="12" width="1920" height="1068" />
     </state>
     <state x="307" y="34" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.24.1920.1056/0.24.1920.1056@0.24.1920.1056" timestamp="1601972290721" />
     <state x="307" y="34" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.24.1920.1056@0.24.1920.1056" timestamp="1605996122405" />
-    <state x="307" y="22" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/1920.0.1920.1080/0.12.1920.1068@0.12.1920.1068" timestamp="1605794842138" />
-    <state x="540" y="175" width="840" height="715" key="find.popup" timestamp="1606222319446">
+    <state x="307" y="24" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/1920.0.1920.1080/0.12.1920.1068@0.12.1920.1068" timestamp="1606227823676" />
+    <state x="540" y="175" width="840" height="715" key="find.popup" timestamp="1606227629976">
       <screen x="0" y="12" width="1920" height="1068" />
     </state>
     <state x="540" y="185" width="840" height="706" key="find.popup/0.24.1920.1056/0.24.1920.1056@0.24.1920.1056" timestamp="1602142915590" />
     <state x="540" y="185" width="840" height="707" key="find.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1605995035523" />
-    <state x="540" y="175" width="840" height="715" key="find.popup/1920.0.1920.1080/0.12.1920.1068@0.12.1920.1068" timestamp="1606222319446" />
+    <state x="540" y="175" width="840" height="715" key="find.popup/1920.0.1920.1080/0.12.1920.1068@0.12.1920.1068" timestamp="1606227629976" />
     <state x="624" y="259" key="run.anything.popup" timestamp="1606082634411">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
@@ -462,7 +462,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/templates/pages/search.html.twig</url>
-          <line>67</line>
+          <line>77</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>

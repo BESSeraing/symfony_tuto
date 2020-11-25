@@ -1,5 +1,5 @@
 {% extends 'layouts/layout.html.twig'%}
-
+{% import 'macros/advert-macros.html.twig' as advertElements %}
 {% block header %}
 
 {% endblock header %}
@@ -16,25 +16,7 @@
                 <div class="row mb50">
                     <h2>Les dernières annonces</h2>
                     {% for advert in adverts %}
-                        <div class="col-md-4">
-                            <div class="hover-item mb30">
-                                {% if advert.gallery.photos | length%}
-                                <img src="{{ asset('uploads/'~ advert.gallery.photos[0].url) }}" class="img-responsive smoothie" alt="">
-                                {% endif %}
-                                <div class="overlay-item-caption smoothie"></div>
-                                <div class="hover-item-caption smoothie">
-                                    <div class="vertical-center smoothie">
-                                        <a href="{{ url('showAdvert', {slug: advert.slug}) }}" class="smoothie btn btn-primary">View</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item-excerpt">
-                                <h4 class="pull-right">{{ advert.price }} €</h4>
-                                <h4><a href="{{ url('showAdvert', {slug: advert.slug}) }}">{{ advert.title}}</a></h4>
-                                <p><a class="tag-link btn btn-theme btn-default btn-xs smoothie" href="{{ url('showByCategory', {name: advert.category.name}) }}">{{ advert.category.name }}</a> <span class="label label-default">{{ advert.year | date('Y') }}</span></p>
-{#                                <p>{{ advert.description }}</p>#}
-                            </div>
-                        </div>
+                        {{ advertElements.advert_block(advert, 4) }}
                     {% endfor %}
                 </div>
             </div>

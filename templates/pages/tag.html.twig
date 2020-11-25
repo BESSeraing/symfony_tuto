@@ -1,5 +1,5 @@
 {% extends 'layouts/layout.html.twig' %}
-
+{% import 'macros/advert-macros.html.twig' as advertElements %}
 {% block content %}
     <section>
         <div class="section-inner">
@@ -7,22 +7,7 @@
             <div class="container">
                 <div class="row mb50">
                     {% for advert in adverts %}
-                        <div class="col-md-4">
-                            <div class="hover-item mb30">
-                                <img src="{{ advert.gallery.photos.first.url }}" class="img-responsive smoothie" alt="">
-                                <div class="overlay-item-caption smoothie"></div>
-                                <div class="hover-item-caption smoothie">
-                                    <div class="vertical-center smoothie">
-                                        <a href="{{ url('showAdvert', {slug: advert.slug}) }}" class="smoothie btn btn-primary">View</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item-excerpt">
-                                <h4 class="pull-right">{{ advert.price }} €</h4>
-                                <h4><a href="{{ url('showAdvert', {slug: advert.slug}) }}">{{ advert.title}}</a></h4>
-                                <p>{{ advert.description }}</p>
-                            </div>
-                        </div>
+                        {{ advertElements.advert_block(advert) }}
                     {% endfor %}
                 </div>
             </div>

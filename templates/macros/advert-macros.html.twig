@@ -9,3 +9,25 @@
         <img alt="Image Title" height="100" src="{{ asset('uploads/'~src) }}" title="Image Title">
     </a>
 {% endmacro %}
+
+{% macro advert_block(advert, size = 4) %}
+    <div class="col-md-{{ size }}">
+        <div class="hover-item mb30">
+            {% if advert.gallery.photos | length %}
+                <img src="{{ asset('uploads/'~advert.gallery.photos.first.url) }}" class="img-responsive smoothie" alt="">
+            {% endif %}
+            <div class="overlay-item-caption smoothie"></div>
+            <div class="hover-item-caption smoothie">
+                <div class="vertical-center smoothie">
+                    <a href="{{ url('showAdvert', {slug: advert.slug}) }}" class="smoothie btn btn-primary">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="item-excerpt">
+            <h4 class="pull-right">{{ advert.price }} €</h4>
+            <h4><a href="{{ url('showAdvert', {slug: advert.slug}) }}">{{ advert.title}}</a></h4>
+            <p>{{ advert.description }}</p>
+        </div>
+    </div>
+{% endmacro %}
+
