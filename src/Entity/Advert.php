@@ -29,7 +29,7 @@ class Advert
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull()
-     * @Assert\Length(min="20")
+     * @Assert\Length(min="12")
      */
     private $title;
 
