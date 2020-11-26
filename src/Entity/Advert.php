@@ -16,7 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Advert
 {
-//    const FAME_SIZES = FrameSize::values();
 
     use AuditableTrait;
 

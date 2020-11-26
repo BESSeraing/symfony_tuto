@@ -28,7 +28,6 @@ class SearchEngine
 
 
     public function getResults(Search $searchQuery, $page = 1): SearchResult {
-//        dump($searchQuery);
         $resultsQuery = $this->advertRepository->findSearchResults($searchQuery);
 
         $pageResult = $this->paginator->paginate(

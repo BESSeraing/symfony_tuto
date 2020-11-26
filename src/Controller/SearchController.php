@@ -28,7 +28,6 @@ class SearchController extends AbstractController
             $result = $searchEngine->getResults($searchQuery, $page);
         }
 
-        dump($result);
         return $this->render('pages/search.html.twig', ['result' => $result, 'form' => $form->createView()]);
     }
 

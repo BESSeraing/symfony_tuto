@@ -73,10 +73,6 @@ class Menu
             $menu[] = $menuUser;
         }
 
-//
-
-
-
         return $menu;
     }
 
