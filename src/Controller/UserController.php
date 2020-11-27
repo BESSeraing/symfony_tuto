@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Advert;
 use App\Form\AdvertType;
+use App\Repository\AdvertRepository;
 use App\Service\AdvertPhotoUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,6 +45,15 @@ class UserController extends AbstractController
         }
 
         return $this->render("pages/account/create-advert.html.twig", ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/my-adverts", name="accountCreateAdvert")
+     */
+    public function myAdverts(AdvertRepository $advertRepository) {
+        $adverts = $advertRepository->findByCreatedBy($this->getUser());
+
+        return $this->render("pages/account/my-adverts.html.twig", ['adverts' => $adverts]);
     }
 
 

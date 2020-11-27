@@ -3,7 +3,7 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block header %}
-    <section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="assets/img/bg/bg2.jpg" data-speed="0.7">
+    <section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="assets/img/bike-sunset.jpg" data-speed="0.7">
         <div class="section-inner pad-top-200">
             <div class="container">
                 <div class="row">
@@ -31,14 +31,17 @@
                         <div class="row">
                         {% for advert in result.results.items %}
                             {{ advertElements.advert_block(advert, 6) }}
-
+                        {% else %}
+                            <div class="alert alert-warning" role="alert">Sorry, no bikes in stock with your criterias</div>
                         {% endfor %}
                         </div>
+                        {% if result.results.items | length %}
                         <div class="row tb50">
                             {% for i in 1..(result.results.totalItemCount/result.results.itemNumberPerPage + 1) | round(0, 'floor')  %}
                                 <a href="{{ url(app.request.get('_route'), app.request.query.all() | merge({page: i}) )}}" class="page-link btn btn-sm btn-primary {{ i == app.request.get('page') ? 'current' : ''  }}">{{ i }}</a>
                             {% endfor %}
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

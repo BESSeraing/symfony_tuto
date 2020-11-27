@@ -84,7 +84,7 @@ $(document).ready(function(){
       }, 500);
     }); 
 
-    $('.vertical-center').flexVerticalCenter({ cssAttribute: 'padding-top' });
+    // $('.vertical-center').flexVerticalCenter({ cssAttribute: 'padding-top' });
 
     // //CONTACT FORM
     // $('#contactform').submit(function(){
