@@ -22,6 +22,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email(checkMX=true)
+     * @Assert\NotNull()
      */
     private $email;
 
@@ -54,6 +55,12 @@ class User implements UserInterface
      */
     private $secretKeyDate;
 
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotNull()
+     */
+    private $username;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,7 +85,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
     }
 
     /**
@@ -180,6 +187,13 @@ class User implements UserInterface
     public function setSecretKeyDate(?\DateTimeInterface $secretKeyDate): self
     {
         $this->secretKeyDate = $secretKeyDate;
+
+        return $this;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }

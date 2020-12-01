@@ -1,6 +1,6 @@
 {% extends 'layouts/account-layout.html.twig' %}
 {% block accountTitle %}
-    Chouette, une nouvelle annonce !
+    {% if form.vars.value.id %}Edition de votre annonce {% else %}Chouette, une nouvelle annonce ! {% endif %}
 {% endblock %}
 {% block accountContent %}
     {{ form_start(form) }}

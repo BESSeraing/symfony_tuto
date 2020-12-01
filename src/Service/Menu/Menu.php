@@ -64,6 +64,12 @@ class Menu
             $menuUser = new MenuElementModel();
             $menuUser->setTitle("Mon Compte");
 
+            $menuMyAdverts = new MenuElementModel();
+            $menuMyAdverts->setTitle('Mes annonces');
+            $menuMyAdverts->setLink($this->urlGenerator->generate('accountMyAdvert'));
+            $menuUser->addChild($menuMyAdverts);
+
+
             $menuLogout = new MenuElementModel();
             $menuLogout->setTitle('Se déconnecter');
             $menuLogout->setLink($this->urlGenerator->generate('app_logout'));

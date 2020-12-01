@@ -68,9 +68,11 @@
                                         <a href="{{ url('showByTag', {name: tag.name}) }}" class="btn btn-secondary">{{ tag.name }}</a>
                                     {% endfor %}
                                 </div>
+                                {% if advert.createdBy == app.user %}
                                 <div>
-                                    <a href="{{ url('editAdvert', {id: advert.id}) }}" class="btn btn-primary"> Edit</a>
+                                    <a href="{{ url('accountEditAdvert', {id: advert.id}) }}" class="btn btn-primary"> Edit</a>
                                 </div>
+                                {% endif %}
 
                             </div>
                         </div>

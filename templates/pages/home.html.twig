@@ -15,9 +15,16 @@
                 <hr>
                 <div class="row mb50">
                     <h2>Les dernières annonces</h2>
-                    {% for advert in adverts %}
-                        {{ advertElements.advert_block(advert, 4) }}
-                    {% endfor %}
+                </div>
+                {% for advert in adverts %}
+                    {% if loop.index0 % 3 == 0 %}
+                        <div class="row">
+                    {% endif %}
+                    {{ advertElements.advert_block(advert, 4) }}
+                    {% if loop.index0 % 3 == 2 or loop.last%}
+                        </div>
+                    {% endif %}
+                {% endfor %}
                 </div>
             </div>
         </div>

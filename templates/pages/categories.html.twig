@@ -10,14 +10,19 @@
                     {{ knp_pagination_sortable(advertsPage, 'Price', 'a.price') }}
                     {{ knp_pagination_sortable(advertsPage, 'Date', 'a.creationDate') }}
                 </div>
-                <div class="row mb50">
+
                     {% for advert in advertsPage.items %}
+                        {% if loop.index0 % 3 == 0 %}
+                            <div class="row">
+                        {% endif %}
                         {{ advertElements.advert_block(advert, 4) }}
+                        {% if loop.index0 % 3 == 2 or loop.last%}
+                        </div>
+                        {% endif %}
                     {% endfor %}
-                </div>
-                <div class="row mb50">
+                <div class="row mb50 mt50">
 {#                    <div class="btn-group">#}
-                    {% for i in 1..advertsPage.totalItemCount/advertsPage.itemNumberPerPage  %}
+                    {% for i in 1..(advertsPage.totalItemCount/advertsPage.itemNumberPerPage +1) | round(0, 'floor') %}
                         <a href="{{ url(app.request.get('_route'), {'name': app.request.get('name'), 'page' : i })}}" class="page-link btn btn-sm btn-primary {{ i == app.request.get('page') ? 'current' : ''  }}">{{ i }}</a>
                     {% endfor %}
 {#                    </div>#}

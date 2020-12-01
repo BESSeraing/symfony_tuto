@@ -134,7 +134,7 @@ class DefaultController extends AbstractController
         $page = $paginator->paginate(
             $query, /* query NOT result */
             $page, /*page number*/
-            2 /*limit per page*/,
+            10 /*limit per page*/,
             $options
         );
 
