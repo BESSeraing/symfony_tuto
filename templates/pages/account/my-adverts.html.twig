@@ -14,5 +14,9 @@
         {% if loop.index0 % 2 == 1 or loop.last%}
         </div>
         {% endif %}
+    {% else %}
+        <div class="row">
+            <p>You don't have any advert. Do you have a <a href="{{ url('accountCreateAdvert') }}">bike for sale ?</a></p>
+        </div>
     {% endfor %}
 {% endblock %}

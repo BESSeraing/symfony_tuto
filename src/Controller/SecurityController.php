@@ -4,12 +4,17 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegisterType;
+use App\Form\ResetPasswordType;
+use App\Form\UserPasswordType;
 use App\Repository\UserRepository;
 use App\Security\AppCustomAuthenticator;
+use App\Security\ResetPasswordModel;
+use App\Security\ResetPasswordService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
@@ -32,6 +37,58 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+    }
+
+    /**
+     * @Route("/reset-password", name="resetPassword")
+     */
+    public function resetPasswordQuery(Request $request, ResetPasswordService $resetPasswordService) {
+        $resetPasswordData = new ResetPasswordModel();
+        $form = $this->createForm(ResetPasswordType::class, $resetPasswordData);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+          $resetPasswordService->startResetPasswordByEmail($resetPasswordData->getEmail());
+          return $this->redirectToRoute('resetPasswordWaiting');
+        }
+        return $this->render("security/reset-password.html.twig", ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/reset-password/waiting", name="resetPasswordWaiting")
+     */
+    public function resetPasswordWaiting() {
+        return $this->render("security/reset-password-waiting.html.twig");
+    }
+
+    /**
+     * @Route("/reset-password/{token}", name="resetPasswordToken")
+     */
+    public function resetPasswordToken(string $token,UserRepository $userRepository, GuardAuthenticatorHandler $guardAuthenticatorHandler, Request $request, AppCustomAuthenticator $authenticator, ResetPasswordService $resetPasswordService) {
+        /**
+         * @var User $user
+         */
+        $user = $userRepository->findOneBy(['tempSecretKey' => $token]);
+        if ($user === null) {
+            throw new NotFoundHttpException();
+        }
+        $valid = false;
+        if ($resetPasswordService->isResetValid($user)) {
+            $valid = true;
+            $form = $this->createForm(UserPasswordType::class, $user);
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()) {
+                $resetPasswordService->savePassword($user);
+
+                return $guardAuthenticatorHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main' // firewall name in security.yaml
+                );
+            }
+        }
+
+        return $this->render("/security/reset-password-token.html.twig", ['valid' => $valid, 'form' => $form->createView()]);
     }
 
     /**
@@ -64,11 +121,18 @@ class SecurityController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('registerWaitingValidation');
         }
 
         return $this->render('security/register.html.twig', ['form' => $form->createView()]);
 
+    }
+
+    /**
+     * @Route("/register-waiting-validation", name="registerWaitingValidation")
+     */
+    public function registerWaitingValidation(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $userPasswordEncoder) {
+        return $this->render('security/register-waiting-validation.html.twig');
     }
 
     /**

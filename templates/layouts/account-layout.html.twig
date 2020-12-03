@@ -4,15 +4,25 @@
     <div class="section-inner">
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
-                    <div class="row">
+                <div class="col-sm-3" style="">
+                    <div class="text-right">
+                        <nav class="">
+                            <ul class="list-unstyled" style="margin:6.4em 0;padding:0 2em;border-right: 1px solid;">
+                                <li><a href="{{ url('accountMyAdvert') }}">My adverts</a></li>
+                                <li><a href="{{ url('accountCreateAdvert') }}">Create advert</a></li>
+                                <li><a href="{{ url('accountCreateAdvert') }}">My profile</a></li>
+                                <li><a href="{{ url('myAccount') }}">My account</a></li>
+                                <li><a href="{{ url('myPassword') }}">Change password</a></li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-9">
                     <div class="row">
                         <h1 class="mb30">{% block accountTitle %}{% endblock accountTitle %}</h1>
-                        {% block accountContent %}{% endblock accountContent %}
                     </div>
+                    {% block accountContent %}{% endblock accountContent %}
+
                 </div>
             </div>
         </div>

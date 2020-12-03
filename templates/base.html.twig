@@ -14,12 +14,26 @@
         <link rel="apple-touch-icon" href="assets/img/ico/apple-touch-icon-57x57.png">
 
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('assets/css/snacks.css') }}">
         {% block stylesheets %}
-
         {% endblock %}
     </head>
     <body id="{% block bodyId %}{% endblock %}">
+
+
+
         {% block body %}{% endblock %}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div id="snackbar" class="{{ label }} showSnack"> {{ message }}</div>
+                {% endfor %}
+            {% endfor %}
         {% block javascripts %}{% endblock %}
+    <script>
+        let x = document.getElementById("snackbar");
+        setTimeout(function(){
+                x.className = x.className.replace("showSnack", "");
+            }, 8000);
+    </script>
     </body>
 </html>

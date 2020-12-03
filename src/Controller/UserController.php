@@ -5,8 +5,13 @@ namespace App\Controller;
 
 
 use App\Entity\Advert;
+use App\Flash\FlashType;
 use App\Form\AdvertType;
+use App\Form\UserPasswordType;
+use App\Form\UserType;
 use App\Repository\AdvertRepository;
+use App\Repository\UserRepository;
+use App\Security\ResetPasswordService;
 use App\Service\AdvertPhotoUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +19,7 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class UserController
@@ -75,6 +81,40 @@ class UserController extends AbstractController
 
         return $this->render("pages/account/my-adverts.html.twig", ['adverts' => $adverts]);
     }
+
+    /**
+     * @Route("/my-account", name="myAccount")
+     */
+    public function myAccount(EntityManagerInterface $entityManager, Request $request) {
+        $user = $this->getUser();
+
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+            $this->addFlash(FlashType::SUCCESS, "Your email has been updated");
+        }
+
+        return $this->render("pages/account/my-account.html.twig", ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/my-password", name="myPassword")
+     */
+    public function myPassword(Request $request, ResetPasswordService $resetPasswordService) {
+        $user = $this->getUser();
+
+        $form = $this->createForm(UserPasswordType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $resetPasswordService->savePassword($user);
+        }
+
+        return $this->render("pages/account/my-account.html.twig", ['form' => $form->createView()]);
+    }
+
+
 
 
 }
